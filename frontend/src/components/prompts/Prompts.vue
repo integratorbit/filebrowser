@@ -24,6 +24,7 @@ import ReplaceRename from "./ReplaceRename.vue";
 import Share from "./Share.vue";
 import ShareDelete from "./ShareDelete.vue";
 import Upload from "./Upload.vue";
+import Unzip from "./Unzip.vue";
 import DiscardEditorChanges from "./DiscardEditorChanges.vue";
 
 const layoutStore = useLayoutStore();
@@ -47,6 +48,7 @@ const components = new Map<string, any>([
   ["share-delete", ShareDelete],
   ["deleteUser", DeleteUser],
   ["discardEditorChanges", DiscardEditorChanges],
+  ["unzip", Unzip],
 ]);
 
 watch(currentPromptName, (newValue) => {

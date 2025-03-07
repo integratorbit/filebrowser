@@ -155,7 +155,8 @@ function moveCopy(
   items: any[],
   copy = false,
   overwrite = false,
-  rename = false
+  rename = false,
+  unzip = false
 ) {
   const layoutStore = useLayoutStore();
   const promises = [];
@@ -164,8 +165,8 @@ function moveCopy(
     const from = item.from;
     const to = encodeURIComponent(removePrefix(item.to ?? ""));
     const url = `${from}?action=${
-      copy ? "copy" : "rename"
-    }&destination=${to}&override=${overwrite}&rename=${rename}`;
+      unzip ? "unzip" : copy ? "copy" : "rename"
+    }&destination=${to}&override=${overwrite}&rename=${rename}&unzip=${unzip}`;
     promises.push(resourceAction(url, "PATCH"));
   }
   layoutStore.closeHovers();
@@ -174,6 +175,10 @@ function moveCopy(
 
 export function move(items: any[], overwrite = false, rename = false) {
   return moveCopy(items, false, overwrite, rename);
+}
+
+export function unzip(items: any[]) {
+  return moveCopy(items, false, false, false, true);
 }
 
 export function copy(items: any[], overwrite = false, rename = false) {
